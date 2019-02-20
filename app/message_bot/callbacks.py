@@ -1,6 +1,6 @@
 import logging
 
-from telegram import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from telegram import ReplyKeyboardRemove
 
 from . import helpers, repositories
 from .models import Ni, Job
