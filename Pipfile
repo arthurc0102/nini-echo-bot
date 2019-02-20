@@ -11,6 +11,8 @@ django = "*"
 django-split-settings = "*"
 django-environ = "*"
 django-extensions = "*"
+python-telegram-bot = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.7"

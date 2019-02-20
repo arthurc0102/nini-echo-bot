@@ -16,6 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from app.message_bot.views import webhook
+
+
 urlpatterns = [
+    # API urls
+    path('webhook', webhook, name='webhook'),
+
+    # Web urls
     path('admin/', admin.site.urls),
 ]
