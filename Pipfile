@@ -13,6 +13,7 @@ django-environ = "*"
 django-extensions = "*"
 python-telegram-bot = "*"
 djangorestframework = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
