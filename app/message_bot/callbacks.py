@@ -16,13 +16,13 @@ logger = logging.getLogger(__name__)
 
 def ni(bot, update):
     chat_id = update.message.chat.id
-    reply_text = helpers.text_after_command(update)
+    reply = helpers.text_after_command(update)
 
-    if not reply_text:
+    if not reply:
         _ni = repositories.random_ni(chat_id)
-        reply_text = _ni.text if _ni else '沒東西還想要我怎樣逆'
+        reply = _ni.text if _ni else '沒東西還想要我怎樣逆'
 
-    update.message.reply_text('{}逆'.format(reply_text))
+    bot.send_message(chat_id, '{}逆'.format(reply))
 
 
 def ni_list(bot, update):
