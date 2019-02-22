@@ -28,7 +28,7 @@ def ni(bot, update):
 def ni_list(bot, update):
     nis = repositories.chat_nis(update.message.chat.id)
     ni_data = ['{}. {}逆'.format(i, _ni.text) for i, _ni in enumerate(nis, 1)]
-    update.message.reply_text('\n'.join(ni_data) or '空空如也')
+    update.message.reply_text('\n'.join(ni_data) or '空空如也', quote=False)
 
 
 def add(bot, update):
