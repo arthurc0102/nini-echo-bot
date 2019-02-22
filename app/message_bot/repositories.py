@@ -1,9 +1,9 @@
 from .models import Ni, Job
 
 
-def random_ni(user_id, chat_id):
+def random_ni(chat_id):
     return Ni.objects\
-        .filter(user_id=user_id, chat_id=chat_id)\
+        .filter(chat_id=chat_id)\
         .order_by('?')\
         .first()
 

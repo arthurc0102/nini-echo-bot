@@ -15,12 +15,11 @@ logger = logging.getLogger(__name__)
 
 
 def ni(bot, update):
-    user_id = update.message.from_user.id
     chat_id = update.message.chat.id
     reply_text = helpers.text_after_command(update)
 
     if not reply_text:
-        _ni = repositories.random_ni(user_id, chat_id)
+        _ni = repositories.random_ni(chat_id)
         reply_text = _ni.text
 
     update.message.reply_text('{}逆'.format(reply_text))
