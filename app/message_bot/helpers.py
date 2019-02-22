@@ -24,7 +24,11 @@ def set_status(user_id, chat_id, status):
     job.save()
 
 
-def build_reply_keyboard(nis):
+def build_reply_keyboard(nis,
+                         resize_keyboard=True,
+                         one_time_keyboard=False,
+                         selective=False):
+
     keyboard = []
     keyboard_column = []
 
@@ -35,4 +39,9 @@ def build_reply_keyboard(nis):
         keyboard_column.append(KeyboardButton(n.text))
     keyboard.append(keyboard_column)
 
-    return ReplyKeyboardMarkup(keyboard)
+    return ReplyKeyboardMarkup(
+        keyboard,
+        resize_keyboard,
+        one_time_keyboard,
+        selective,
+    )
