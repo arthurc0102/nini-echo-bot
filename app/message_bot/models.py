@@ -10,7 +10,7 @@ class Ni(models.Model):
 
     class Meta:
         unique_together = (
-            ('text', 'user_id', 'chat_id'),
+            ('text', 'chat_id'),
         )
 
     def __str__(self):
