@@ -70,7 +70,10 @@ def cancel(bot, update):
     user_id = update.message.from_user.id
     chat_id = update.message.chat.id
     repositories.user_job(user_id, chat_id).delete()
-    update.message.reply_text('已取消～', reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text(
+        '已取消～',
+        reply_markup=ReplyKeyboardRemove(selective=True)
+    )
 
 
 def ni_add(update, job):
@@ -102,7 +105,7 @@ def ni_edit(update, job):
     job.save()
     update.message.reply_text(
         '請輸入你的新內容',
-        reply_markup=ReplyKeyboardRemove()
+        reply_markup=ReplyKeyboardRemove(selective=True)
     )
 
     return False
@@ -146,5 +149,5 @@ def text_message(bot, update):
     job.delete()
     update.message.reply_text(
         '已經完成你的要求啦～',
-        reply_markup=ReplyKeyboardRemove()
+        reply_markup=ReplyKeyboardRemove(selective=True)
     )
