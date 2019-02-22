@@ -26,8 +26,8 @@ def set_status(user_id, chat_id, status):
 
 def build_reply_keyboard(nis,
                          resize_keyboard=True,
-                         one_time_keyboard=False,
-                         selective=False):
+                         one_time_keyboard=True,
+                         selective=True):
 
     keyboard = []
     keyboard_column = []
