@@ -1,1 +1,1 @@
-git pull && ./run-docker.sh build && ./run.sh down && ./run.sh up -d
+git pull && ./run.sh build && ./run.sh down && ./run.sh up -d
