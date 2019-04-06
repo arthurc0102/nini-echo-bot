@@ -38,7 +38,6 @@ services:
       - django
 
 volumes:
-  pg_data:
   django_log:
   django_media:
   django_static:
