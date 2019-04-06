@@ -18,8 +18,6 @@ services:
       TG_TOKEN: $TG_TOKEN
     networks:
       - internal
-    depends_on:
-      - db
 
   web:
     image: nginx:alpine
