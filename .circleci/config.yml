@@ -34,7 +34,7 @@ jobs:
           name: Copy docker-compose to server
           command: |
             cd deploy
-            scp -P $PORT docker-compose.yml $USER@$HOST:$PROJECT_ROOT
+            scp -P $PORT docker-compose.yml .env.example $USER@$HOST:$PROJECT_ROOT
             ssh -p $PORT $USER@$HOST \
                 "cd $PROJECT_ROOT && \
                 docker-compose pull && \
