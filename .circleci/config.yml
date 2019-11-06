@@ -11,9 +11,14 @@ jobs:
             echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin docker.arthurc.me
 
       - run:
+          name: Pull cache image
+          command: |
+            docker pull docker.arthurc.me/nini-echo-bot/server:$CIRCLE_BRANCH || echo 'Image not exists.'
+
+      - run:
           name: Build Docker
           command: |
-            docker build -t docker.arthurc.me/nini-echo-bot/server:$CIRCLE_BRANCH .
+            docker build --cache-from=docker.arthurc.me/nini-echo-bot/server:$CIRCLE_BRANCH -t docker.arthurc.me/nini-echo-bot/server:$CIRCLE_BRANCH .
             docker tag docker.arthurc.me/nini-echo-bot/server:$CIRCLE_BRANCH docker.arthurc.me/nini-echo-bot/server:$CIRCLE_SHA1
 
       - run:
