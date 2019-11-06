@@ -2,7 +2,7 @@ version: '3'
 
 services:
   django:
-    image: docker.arthurc.me/ntub-app/server:${DOCKER_TAG}
+    image: docker.arthurc.me/nini-echo-bot/server:${DOCKER_TAG}
     restart: always
     volumes:
       - django_log:/src/log
