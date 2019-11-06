@@ -1,0 +1,61 @@
+version: 2
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Login to Docker Hub
+          command: |
+            echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin docker.arthurc.me
+
+      - run:
+          name: Build Docker
+          command: |
+            docker build -t docker.arthurc.me/nini-echo-bot/server:$CIRCLE_BRANCH .
+            docker tag docker.arthurc.me/nini-echo-bot/server:$CIRCLE_BRANCH docker.arthurc.me/nini-echo-bot/server:$CIRCLE_SHA1
+
+      - run:
+          name: Push to Docker Hub
+          command: |
+            docker push docker.arthurc.me/nini-echo-bot/server:$CIRCLE_BRANCH
+            docker push docker.arthurc.me/nini-echo-bot/server:$CIRCLE_SHA1
+
+  deploy:
+    machine: true
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "4b:7a:f5:16:54:4a:18:5a:85:e8:1d:41:48:82:79:58"
+
+      - run:
+          name: Copy docker-compose to server
+          command: |
+            cd deploy
+            scp -P $PORT docker-compose.yml $USER@$HOST:$PROJECT_ROOT
+            ssh -p $PORT $USER@$HOST \
+                "cd $PROJECT_ROOT && \
+                docker-compose pull && \
+                docker-compose up -d && \
+                docker images -f 'dangling=true' -q | xargs -r docker rmi"
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+
+      - deploy:
+          requires:
+            - build
+
+          filters:
+            branches:
+              only:
+                - master
